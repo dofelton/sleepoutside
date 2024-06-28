@@ -244,3 +244,25 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.discount-none{
+  display: none;
+}
+
+.discount-low {
+  color: red;
+  display: block;
+  font-weight: bold;
+}
+
+.discount-medium {
+  color: orange;
+  display: block;
+  font-weight: bold;
+}
+
+.discount-high {
+  color: green;
+  display: block;
+  font-weight: bold;
+}
