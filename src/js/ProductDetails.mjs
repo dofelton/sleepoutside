@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, itemsInCart } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, itemsInCart, loadHeaderFooter } from "./utils.mjs";
 
 // to recuperate the arrays of products in the cart from local storage
 let listCart = [];
@@ -14,6 +14,7 @@ export default class ProductDetails {
   }
 
   async init() {
+    // loadHeaderFooter();
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
     // once we have the product details we can render out the HTML
@@ -70,7 +71,7 @@ function productDetailsTemplateConstruct(product) {
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${product.Image.PrimaryLarge}"
+      src="${product.Images.PrimaryLarge}"
       alt="${product.NameWithoutBrand}"
     />
     <p class="${classDiscount}">${discountPercentage} %</p>

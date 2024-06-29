@@ -55,13 +55,19 @@ async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("../partials/header.html");
-  const headerElement = document.querySelector("#header");
-  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const headerTemplate = await loadTemplate("../public/partials/header.html");
+  const headerElement = document.querySelector("#main-header");
+  const footerTemplate = await loadTemplate("../public/partials/footer.html");
   const footerElement = document.querySelector("#footer");
 
-  renderWithTemplate(headerTemplate, headerElement);
+  var data =  getLocalStorage("so-so-cart");
+  if (data) {
+    renderWithTemplate(headerTemplate, headerElement,data, itemsInCart);
+  } else {
+    renderWithTemplate(headerTemplate, headerElement);
+  }
   renderWithTemplate(footerTemplate, footerElement);
+
 }
 
 export function setClick(selector, callback) {
@@ -73,20 +79,20 @@ export function setClick(selector, callback) {
   
 }
 
-export function itemsInCart() {
-    const inCart = getLocalStorage("so-cart");
+export function itemsInCart(data) {
+    // const inCart = getLocalStorage("so-cart");
     const circle = document.querySelector(".circle");
     try {
-      if (inCart.length > 0 && inCart.length < 10) {
+      if (data.length > 0 && data.length < 10) {
         circle.style.display = "block";
         var number = document.querySelector(".one-number");
         number.style.display = "block";
-        number.innerHTML = inCart.length;
-      } else if (inCart.length >= 10) {
+        number.innerHTML = data.length;
+      } else if (data.length >= 10) {
         circle.style.display = "block";
         var display = document.querySelector(".two-numbers");
         display.style.display = "block";
-        display.innerHTML = inCart.length;
+        display.innerHTML = data.length;
       } else {
         circle.style.display = "none";
         document.querySelector(".one-number").style.display = "none";

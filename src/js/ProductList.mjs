@@ -1,27 +1,3 @@
-
-import { renderListWithTemplate } from './utils.mjs';
-
-export default class ProductListing {
-  constructor(category, dataSource, listElement) {
-    this.category = category;
-    this.dataSource = dataSource;
-    this.listElement = listElement;
-  }
-
-  async init() {
-    const products = await this.dataSource.getData();
-
-    this.renderList(products);
-  }
-
-  renderList(list) {
-    renderListWithTemplate(createProductListItem, this.listElement, list);
-    
-    // const htmlStrings = list.map(createProductListItem);
-    // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
-  }
-}
-
 function createProductListItem(product) {
   return `<li class="product-card">
             <a href="product_pages/?product=${product.Id}">
@@ -57,9 +33,8 @@ export default class ProductList {
     }
     async init() {
         const list = await this.dataSource.getData(this.category);
-        console.log(`init data: ${this.category}`)
         this.renderList(list);
-        document.querySelector(".title").innerHTML = this.category;
+        document.querySelector(".top-products").innerHTML = `Top Products: ${this.category[0].toUpperCase() + this.category.slice(1)}`;
 
     }
     renderList(getData) {

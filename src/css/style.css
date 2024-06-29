@@ -110,7 +110,9 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.one-number, .two-numbers, .circle {
+.one-number,
+.two-numbers,
+.circle {
   display: none;
 }
 
@@ -212,7 +214,7 @@ button {
   border-radius: 5px;
   align-self: center;
   justify-self: center;
-  padding: .1em;
+  padding: 0.1em;
   color: #ffffff;
 }
 
@@ -223,7 +225,7 @@ button {
 }
 
 .cart-total {
-  display:none;
+  display: none;
 }
 
 .product-grid {
@@ -240,6 +242,24 @@ button {
 .product-grid li {
   width: 100%;
   height: auto;
+}
+
+.category-list {
+  display: flex;
+  list-style-type: none;
+}
+.category-list li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #030303;
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.category-list img {
+  width: 80%;
 }
 
 @media screen and (min-width: 500px) {
@@ -261,7 +281,7 @@ footer {
   padding: 1em;
 }
 
-.discount-none{
+.discount-none {
   display: none;
 }
 
