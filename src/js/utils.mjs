@@ -60,12 +60,9 @@ export async function loadHeaderFooter() {
   const footerTemplate = await loadTemplate("../public/partials/footer.html");
   const footerElement = document.querySelector("#footer");
 
-  var data =  getLocalStorage("so-so-cart");
-  if (data) {
-    renderWithTemplate(headerTemplate, headerElement,data, itemsInCart);
-  } else {
-    renderWithTemplate(headerTemplate, headerElement);
-  }
+  var data =  getLocalStorage("so-cart");
+
+  renderWithTemplate(headerTemplate, headerElement,data, itemsInCart);
   renderWithTemplate(footerTemplate, footerElement);
 
 }
@@ -80,15 +77,14 @@ export function setClick(selector, callback) {
 }
 
 export function itemsInCart(data) {
-    // const inCart = getLocalStorage("so-cart");
     const circle = document.querySelector(".circle");
     try {
-      if (data.length > 0 && data.length < 10) {
+      if (data && data.length > 0 && data.length < 10) {
         circle.style.display = "block";
         var number = document.querySelector(".one-number");
         number.style.display = "block";
         number.innerHTML = data.length;
-      } else if (data.length >= 10) {
+      } else if (data && data.length >= 10) {
         circle.style.display = "block";
         var display = document.querySelector(".two-numbers");
         display.style.display = "block";
@@ -99,6 +95,9 @@ export function itemsInCart(data) {
         document.querySelector(".two-numbers").style.display = " none";
       }
     } catch {
+      document.querySelector(".cicle").style.display = "none";
+      document.querySelector(".one-number").style.display = "none";
+      document.querySelector(".two-numbers").style.display = " none";
       new Error("Error reading cookies");
     }
   }

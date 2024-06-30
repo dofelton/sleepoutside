@@ -1,7 +1,6 @@
 import {
   getLocalStorage,
   setLocalStorage,
-  itemsInCart,
   loadHeaderFooter,
 } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
@@ -11,7 +10,7 @@ import ShoppingCart from "./ShoppingCart.mjs";
 function renderCartContents() {
   loadHeaderFooter();
   const cartItems = getLocalStorage("so-cart");
-  if (cartItems.length > 0) {
+  if (cartItems && cartItems.length > 0) {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
     var items = document.querySelectorAll(".delete");
@@ -21,14 +20,13 @@ function renderCartContents() {
     document.querySelector(".product-list").innerHTML = htmlItems;
   }
   total(cartItems);
-  itemsInCart();
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
