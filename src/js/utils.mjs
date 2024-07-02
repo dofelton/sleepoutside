@@ -77,22 +77,28 @@ export function setClick(selector, callback) {
 }
 
 export function itemsInCart(data) {
-    const circle = document.querySelector(".circle");
+  var totalItems = 0;
+  const one = document.querySelector(".one-number");
+  const two = document.querySelector(".two-numbers");
+  const circle = document.querySelector(".circle");
     try {
+      for (let item of data) {
+        totalItems += parseInt(item.Qty)
+      }
       if (data && data.length > 0 && data.length < 10) {
         circle.style.display = "block";
-        var number = document.querySelector(".one-number");
-        number.style.display = "block";
-        number.innerHTML = data.length;
+        one.style.display = "block";
+        // two.style.display = "none";
+        one.innerHTML = totalItems;
       } else if (data && data.length >= 10) {
         circle.style.display = "block";
-        var display = document.querySelector(".two-numbers");
-        display.style.display = "block";
-        display.innerHTML = data.length;
+        // one.style.display = "none";
+        two.style.display = "block";
+        two.innerHTML = totalItems;
       } else {
         circle.style.display = "none";
-        document.querySelector(".one-number").style.display = "none";
-        document.querySelector(".two-numbers").style.display = " none";
+        one.style.display = "none";
+        two.style.display = " none";
       }
     } catch {
       document.querySelector(".cicle").style.display = "none";

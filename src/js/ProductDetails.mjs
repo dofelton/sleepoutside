@@ -28,19 +28,31 @@ export default class ProductDetails {
     // itemsInCart();
   }
   
-addToCart() {
-    if (this.product) {
-      try {
-        listCart.push(this.product);
-        setLocalStorage("so-cart", listCart);
-        location.reload();
-      } catch {
-        new Error("Could not add item");
-      }
+  addToCart() {
+    let cartList = getLocalStorage("so-cart");
+    var needsToBeAdded = true;
+    if (!cartList) cartList = [];
+    try {
+      if (cartList.length > 0) {
+        cartList.forEach(element => { if (element.Id === this.product.Id) {
+          const increment = parseInt(element.Qty) + 1;
+          element.Qty = String(increment);
+          needsToBeAdded = false;
+          return;
+        }
+      })}
+    if (needsToBeAdded){
+        this.product.Qty = "1";
+        cartList.push(this.product);
     }
-    cartContents.push(this.product);
-    setLocalStorage("so-cart", cartContents);
-  }
+      setLocalStorage("so-cart", cartList);
+      location.reload();
+
+    }
+    catch {
+       new Error ("Problem adding product to cart");
+    } 
+}
 
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
