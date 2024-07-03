@@ -4,9 +4,8 @@ import {
   loadHeaderFooter,
   itemsInCart,
 } from "./utils.mjs";
-import ShoppingCart from "./ShoppingCart.mjs";
 
-// loadHeaderFooter();
+import ShoppingCart from "./ShoppingCart.mjs";
 
 function renderCartContents() {
   loadHeaderFooter();
