@@ -14,9 +14,12 @@ export default class ProductDetails {
   }
 
   async init() {
-    // load the header and footer
+
+    loadHeaderFooter();
+    
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log(`init product id: ${this.productId}`)
     // once we have the product details we can render out the HTML
     this.renderProductDetails("main");
     // once the HTML is rendered we can add a listener to Add to Cart button
@@ -28,23 +31,34 @@ export default class ProductDetails {
   }
   
   addToCart() {
-    if (this.product) {
-      try {
-        listCart.push(this.product);
-        setLocalStorage("so-cart", listCart);
-        location.reload();
-      } catch {
-        new Error("Could not add item");
-      }
+    let cartList = getLocalStorage("so-cart");
+    var needsToBeAdded = true;
+    if (!cartList) cartList = [];
+    try {
+      if (cartList.length > 0) {
+        cartList.forEach(element => { if (element.Id === this.product.Id) {
+          const increment = parseInt(element.Qty) + 1;
+          element.Qty = String(increment);
+          needsToBeAdded = false;
+          return;
+        }
+      })}
+    if (needsToBeAdded){
+        this.product.Qty = "1";
+        cartList.push(this.product);
     }
-  }
+      setLocalStorage("so-cart", cartList);
+      location.reload();
+
+    }
+    catch {
+       new Error ("Problem adding product to cart");
+    } 
+}
 
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
-
-    if (element) {
-      element.innerHTML = productDetailsTemplateConstruct(this.product);
-    }
+    element.insertAdjacentHTML("afterBegin",productDetailsTemplateConstruct(this.product));
   }
 }
 
@@ -71,7 +85,7 @@ function productDetailsTemplateConstruct(product) {
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${product.Image}"
+      src="${product.Images.PrimaryExtraLarge}"
       alt="${product.NameWithoutBrand}"
     />
     <p class="${classDiscount}">${discountPercentage} %</p>

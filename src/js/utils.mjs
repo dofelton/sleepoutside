@@ -13,23 +13,15 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
-// set a listener for both touchend and click
-export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
-    event.preventDefault();
-    callback();
-  });
-  qs(selector).addEventListener("click", callback);
-}
 
 // new function to get URL parameters
-export function getParams(param) {
+export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
-
   return product;
 }
+
 
 export function renderListWithTemplate(
   templateFn,
@@ -79,16 +71,15 @@ export function renderWithTemplate(templateFn, parentElement, data, callback) {
 }
 
 export async function loadHeaderFooter() {
-  const filePathHeader = "/partials/header.html";
-  const filePathFooter = "/partials/footer.html";
-  const header = await loadTemplate(filePathHeader);
-  const footer = await loadTemplate(filePathFooter);
-
+  const headerTemplate = await loadTemplate("../public/partials/header.html");
   const headerElement = document.querySelector("#main-header");
+  const footerTemplate = await loadTemplate("../public/partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
 
-  renderWithTemplate(header, headerElement);
-  renderWithTemplate(footer, footerElement);
+  var data =  getLocalStorage("so-cart");
+
+  renderWithTemplate(headerTemplate, headerElement,data, itemsInCart);
+  renderWithTemplate(footerTemplate, footerElement);
   itemsInCart();
 }
 
@@ -97,3 +88,44 @@ async function loadTemplate(path) {
   const template = await res.text();
   return template;
 }
+
+export function setClick(selector, callback) {
+  qs(selector).addEventListener("touchend", (event) => {
+    event.preventDefault();
+    callback();
+  });
+  qs(selector).addEventListener("click", callback)
+  
+}
+
+// export function itemsInCart(data) {
+//   var totalItems = 0;
+//   const one = document.querySelector(".one-number");
+//   const two = document.querySelector(".two-numbers");
+//   const circle = document.querySelector(".circle");
+//     try {
+//       for (let item of data) {
+//         totalItems += parseInt(item.Qty)
+//       }
+//       if (data && data.length > 0 && data.length < 10) {
+//         circle.style.display = "block";
+//         one.style.display = "block";
+//         // two.style.display = "none";
+//         one.innerHTML = totalItems;
+//       } else if (data && data.length >= 10) {
+//         circle.style.display = "block";
+//         // one.style.display = "none";
+//         two.style.display = "block";
+//         two.innerHTML = totalItems;
+//       } else {
+//         circle.style.display = "none";
+//         one.style.display = "none";
+//         two.style.display = " none";
+//       }
+//     } catch {
+//       document.querySelector(".cicle").style.display = "none";
+//       document.querySelector(".one-number").style.display = "none";
+//       document.querySelector(".two-numbers").style.display = " none";
+//       new Error("Error reading cookies");
+//     }
+//   }

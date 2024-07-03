@@ -110,7 +110,9 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.one-number, .two-numbers, .circle {
+.one-number,
+.two-numbers,
+.circle {
   display: none;
 }
 
@@ -173,7 +175,7 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  grid-template-columns: 25% auto 15% 3%;
+  grid-template-columns: 25% auto 15% 5%;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
@@ -205,15 +207,55 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+
+.change-number {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  /* margin: 5%; */
+  /* padding: 5%; */
+}
+
+.change-number p {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+span.minus,
+span.plus {
+  background-color: #cbcbcb;
+  padding: 3%;
+  width: 40%;
+  height: 100%;
+  border-radius: 20%;
+  cursor: pointer;
+  text-align: center;
+}
+
+span.minus:hover,
+span.plus:hover {
+  background-color: #e8e8e8;
+  color: #303030ad;
+}
+
+input {
+  width: 50%;
+  text-align: center;
+  border: #ffffff;
+}
+
 .delete {
   grid-row: 1;
   grid-column: 4;
   background-color: rgb(188, 42, 42);
   border-radius: 5px;
-  align-self: center;
-  justify-self: center;
-  padding: .1em;
+  align-self: baseline;
+  justify-self: end;
+  padding: 0.1em;
   color: #ffffff;
+  text-align: center;
 }
 
 .delete:hover {
@@ -223,7 +265,41 @@ button {
 }
 
 .cart-total {
-  display:none;
+  display: none;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  list-style-type: none;
+  align-items:baseline;
+  font-size: 1rem;
+}
+.product-grid h2 {
+  text-align: center;
+}
+
+.product-grid li {
+  width: 100%;
+  height: auto;
+}
+
+.category-list {
+  display: flex;
+  list-style-type: none;
+}
+.category-list li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #030303;
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.category-list img {
+  width: 80%;
 }
 
 @media screen and (min-width: 500px) {
@@ -236,7 +312,7 @@ button {
   }
   .cart-card {
     font-size: inherit;
-    grid-template-columns: 150px auto 15% 3%;
+    grid-template-columns: 150px auto 15% 5%;
   }
 }
 
@@ -245,7 +321,8 @@ footer {
   padding: 1em;
 }
 
-.discount-none{
+
+.discount-none {
   display: none;
 }
 
