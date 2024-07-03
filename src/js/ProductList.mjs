@@ -24,8 +24,8 @@ export default class ProductList {
         document.querySelector(".top-products").innerHTML = `Top Products: ${this.category[0].toUpperCase() + this.category.slice(1)}`;
 
     }
-    renderList(getData) {
-        renderListWithTemplate(productCardTemplate, this.listElement, getData);
+    renderList(list) {
+        renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
     refineList(listNeded, data) {
         var refineList =  [];
