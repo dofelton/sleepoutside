@@ -71,9 +71,9 @@ export function renderWithTemplate(templateFn, parentElement, data, callback) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("../public/partials/header.html");
+  const headerTemplate = await loadTemplate("/partials/header.html");
   const headerElement = document.querySelector("#main-header");
-  const footerTemplate = await loadTemplate("../public/partials/footer.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
 
   var data =  getLocalStorage("so-cart");
@@ -92,40 +92,13 @@ async function loadTemplate(path) {
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
+    const myForm = document.forms[0];
+    const chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if(chk_status)
+      mycheckout.checkout();
     callback();
   });
   qs(selector).addEventListener("click", callback)
   
 }
-
-// export function itemsInCart(data) {
-//   var totalItems = 0;
-//   const one = document.querySelector(".one-number");
-//   const two = document.querySelector(".two-numbers");
-//   const circle = document.querySelector(".circle");
-//     try {
-//       for (let item of data) {
-//         totalItems += parseInt(item.Qty)
-//       }
-//       if (data && data.length > 0 && data.length < 10) {
-//         circle.style.display = "block";
-//         one.style.display = "block";
-//         // two.style.display = "none";
-//         one.innerHTML = totalItems;
-//       } else if (data && data.length >= 10) {
-//         circle.style.display = "block";
-//         // one.style.display = "none";
-//         two.style.display = "block";
-//         two.innerHTML = totalItems;
-//       } else {
-//         circle.style.display = "none";
-//         one.style.display = "none";
-//         two.style.display = " none";
-//       }
-//     } catch {
-//       document.querySelector(".cicle").style.display = "none";
-//       document.querySelector(".one-number").style.display = "none";
-//       document.querySelector(".two-numbers").style.display = " none";
-//       new Error("Error reading cookies");
-//     }
-//   }
