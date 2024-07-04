@@ -346,6 +346,7 @@ footer {
   font-weight: bold;
 }
 
+
 header img {
   height: 100px;
   width: auto;
@@ -396,7 +397,6 @@ header img {
   max-width: 400px;
   margin: -1 rem 2% 2rem 2%;
 }
-
 
 .checkout input:required {
   border-right: solid 8px red;
