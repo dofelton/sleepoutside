@@ -14,7 +14,7 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
-      <form name="checkout">
+      <form class="checkout">
         <fieldset id="customer">
           <legend>Customer Information</legend>
           <label>First Name: <input type="text" name="firstName" required></label>
@@ -27,7 +27,8 @@
         <fieldset id="payment">
           <legend>Payment Information</legend>
           <label>Credit Card Number: <input name="credit-number" class="cc-number" type="tel" pattern="\d*" maxlength="19" placeholder="Card Number" required></label>
-          <label>Expiration Date: <input name="credit-expires" class="cc-expires" type="tel" pattern="\d*" maxlength="7" placeholder="MM / YY" required></label>
+          <label>Expiration Date: <input name="credit-expires" class="cc-expires" type="tel" pattern="^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$"
+            maxlength="7" placeholder="MM / YY" required></label>
           <label>Security Code <input name="credit-cvc" class="cc-cvc" type="tel" pattern="\d*" maxlength="4" placeholder="CVC" required></label>
         </fieldset>
         <fieldset class="checkout-summary">

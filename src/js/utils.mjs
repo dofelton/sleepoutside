@@ -62,18 +62,24 @@ export function itemsInCart() {
   }
 }
 
-export function renderWithTemplate(templateFn, parentElement, data, callback) {
-  parentElement.insertAdjacentHTML("afterbegin", templateFn);
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
 
   if (callback) {
     callback(data);
   }
 }
 
+async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("/partials/header.html");
+  const headerTemplate = await loadTemplate("../partials/header.html");
   const headerElement = document.querySelector("#main-header");
-  const footerTemplate = await loadTemplate("/partials/footer.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
 
   var data =  getLocalStorage("so-cart");
@@ -81,12 +87,6 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement,data, itemsInCart);
   renderWithTemplate(footerTemplate, footerElement);
   itemsInCart();
-}
-
-async function loadTemplate(path) {
-  const res = await fetch(path);
-  const template = await res.text();
-  return template;
 }
 
 export function setClick(selector, callback) {
@@ -101,4 +101,24 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback)
   
+}
+
+export function alertMessage(message, scroll = true, duration = 3000) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  if (scroll) window.scrollTo(0,0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
