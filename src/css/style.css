@@ -7,7 +7,9 @@
   --tertiary-color: #a4b8c4;
   --light-grey: #d0d0d0;
   --dark-grey: #303030;
-
+  --text: #008bee;
+  --background: #eee;
+  --border: rgb(113, 112, 112)
   /* sizes */
   --font-base: 18px;
   --small-font: 0.8em;
@@ -342,4 +344,64 @@ footer {
   color: green;
   display: block;
   font-weight: bold;
+}
+
+header img {
+  height: 100px;
+  width: auto;
+}
+
+.checkout fieldset {
+  margin: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .5rem 2%
+}
+
+.checkout legend {
+  color: var(--text);
+  padding: 0 .5rem;
+}
+
+.checkout label {
+  display: block;
+  padding-top: 1rem;
+  font-size: .9rem;
+}
+
+.checkout div {
+  padding-top: 1rem;
+  color: var(--text);
+  font-size: .9rem;
+}
+
+.checkout input[type="text"],
+.checkout input[type="number"],
+.checkout input[type="tel"] {
+  display: block;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  background-color: var(--background);
+  padding: .75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.checkout input[type=submit] {
+  background-image: linear-gradient(blue, rgb(119, 119, 244));
+  color: white;
+  border-radius: 6px;
+  padding: .8rem;
+  width: 96%;
+  max-width: 400px;
+  margin: -1 rem 2% 2rem 2%;
+}
+
+
+.checkout input:required {
+  border-right: solid 8px red;
+}
+
+.checkout input:required:valid {
+  border-right: solid 8px green;
 }
