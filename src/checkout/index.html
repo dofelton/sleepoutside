@@ -20,6 +20,27 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+      <form>
+        <fieldset id="customer">
+          <legend>Customer Information</legend>
+          <label>First Name: <input type="text" name="firstName" required></label>
+          <label>Last Name: <input type="text" name="lastName" required></label>
+          <label>Street Address: <input type="text" name="address" required></label>
+          <label>City: <input type="text" name="city" required></label>
+          <label>State: <input type="text" name="state" required></label>
+          <label>Zip Code: <input type="number" required pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$"></label>
+          </fieldset>   
+          <!-- <input id="zip" name="zip" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$"> -->
+        </fieldset>
+        <fieldset id="payment">
+          <legend>Payment Information</legend>
+          <label>Credit Card Number: <input name="credit-number" class="cc-number" type="tel" pattern="\d*" maxlength="19" placeholder="Card Number" required></label>
+          <label>Expiration Date: <input name="credit-expires" class="cc-expires" type="tel" pattern="\d*" maxlength="7" placeholder="MM / YY" required></label>
+          <label>Security Code <input name="credit-cvc" class="cc-cvc" type="tel" pattern="\d*" maxlength="4" placeholder="CVC" required></label>
+          <submit>Checkout Now</submit>
+        </fieldset>
+      </form>
+      <div id="orderTotal"></div>
     </main>
 
     <footer id="main-footer"></footer>

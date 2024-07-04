@@ -51,7 +51,7 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-function total(cartItems) {
+export function total(cartItems) {
   var displayTotal = document.querySelector(".cart-total");
   if (cartItems.length > 0) {
     var finalPrice = 0;
