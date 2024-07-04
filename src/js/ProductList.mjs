@@ -5,7 +5,7 @@ function productCardTemplate(product) {
     return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
     <img
-        src="${product.Images.PrimaryMedium}"
+        src="${product.Images.PrimaryLarge}"
         alt="Image of ${product.Name}"
         />
         <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -21,13 +21,12 @@ export default class ProductList {
     }
     async init() {
         const list = await this.dataSource.getData(this.category);
-        console.log(`init data: ${this.category}`)
         this.renderList(list);
-        document.querySelector(".title").innerHTML = this.category;
+        document.querySelector(".top-products").innerHTML = `Top Products: ${this.category[0].toUpperCase() + this.category.slice(1)}`;
 
     }
-    renderList(getData) {
-        renderListWithTemplate(productCardTemplate, this.listElement, getData);
+    renderList(list) {
+        renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
     refineList(listNeded, data) {
         var refineList =  [];
