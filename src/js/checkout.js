@@ -3,6 +3,3 @@ import { total } from "./cart.js";
 
 loadHeaderFooter();
 
-export default class CheckoutProcess {
-    
-}

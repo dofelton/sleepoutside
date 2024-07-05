@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
 
 // to recuperate the arrays of products in the cart from local storage
 let listCart = [];
@@ -14,12 +14,9 @@ export default class ProductDetails {
   }
 
   async init() {
-
-    loadHeaderFooter();
     
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
-    console.log(`init product id: ${this.productId}`)
     // once we have the product details we can render out the HTML
     this.renderProductDetails("main");
     // once the HTML is rendered we can add a listener to Add to Cart button
@@ -27,13 +24,15 @@ export default class ProductDetails {
     document
     .getElementById("addToCart")
     .addEventListener("click", this.addToCart.bind(this));
-    await loadHeaderFooter();
+    // await loadHeaderFooter();
   }
   
   addToCart() {
     let cartList = getLocalStorage("so-cart");
     var needsToBeAdded = true;
-    if (!cartList) cartList = [];
+    if (!cartList) {
+      cartList = [];
+    }
     try {
       if (cartList.length > 0) {
         cartList.forEach(element => { if (element.Id === this.product.Id) {
@@ -49,7 +48,7 @@ export default class ProductDetails {
     }
       setLocalStorage("so-cart", cartList);
       location.reload();
-
+      alertMessage(`${this.product.NameWithoutBrand} added to cart`)
     }
     catch {
        new Error ("Problem adding product to cart");
