@@ -364,6 +364,10 @@ header img {
   padding: .5rem 2%
 }
 
+.checkout {
+  border: 1px solid black;
+}
+
 .checkout legend {
   color: var(--text);
   padding: 0 .5rem;
@@ -383,6 +387,7 @@ header img {
 
 .checkout input[type="text"],
 .checkout input[type="number"],
+.checkout input[type="email"],
 .checkout input[type="tel"] {
   display: block;
   border: solid 1px var(--border);
