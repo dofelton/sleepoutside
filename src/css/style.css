@@ -7,7 +7,9 @@
   --tertiary-color: #a4b8c4;
   --light-grey: #d0d0d0;
   --dark-grey: #303030;
-
+  --text: #008bee;
+  --background: #eee;
+  --border: rgb(113, 112, 112)
   /* sizes */
   --font-base: 18px;
   --small-font: 0.8em;
@@ -342,13 +344,6 @@ footer {
   color: green;
   display: block;
   font-weight: bold;
-}
-
-:root {
-  --text: #008bee;
-  --background: #eee;
-  --border: rgb(113, 112, 112)
-
 }
 
 
