@@ -47,7 +47,7 @@ export default class CheckoutProcess {
             this.outputSelector + " #num-items"
         );
         itemNumElement.innerText = this.list.length;
-
+        console.log(this.list);
         const amounts = this.list.map((item) => item.FinalPrice);
         this.itemTotal = amounts.reduce((sum, item) => sum + item);
         summaryElement.innerText = `$${this.itemTotal}`;
