@@ -96,7 +96,7 @@ export function setClick(selector, callback) {
     const chk_status = myForm.checkValidity();
     myForm.reportValidity();
     if(chk_status)
-      mycheckout.checkout();
+      // mycheckout.checkout();
     callback();
   });
   qs(selector).addEventListener("click", callback)
