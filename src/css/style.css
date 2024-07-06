@@ -9,9 +9,7 @@
   --dark-grey: #303030;
   --text: #008bee;
   --background: #eee;
-  --border: rgb(113, 112, 112)
-  /* sizes */
-  --font-base: 18px;
+  --border: rgb(113, 112, 112) /* sizes */ --font-base: 18px;
   --small-font: 0.8em;
   --large-font: 1.2em;
 }
@@ -274,7 +272,7 @@ input {
   display: grid;
   grid-template-columns: auto auto auto auto;
   list-style-type: none;
-  align-items:baseline;
+  align-items: baseline;
   font-size: 1rem;
 }
 .product-grid h2 {
@@ -323,7 +321,6 @@ footer {
   padding: 1em;
 }
 
-
 .discount-none {
   display: none;
 }
@@ -346,7 +343,6 @@ footer {
   font-weight: bold;
 }
 
-
 header img {
   height: 100px;
   width: auto;
@@ -356,24 +352,24 @@ header img {
   margin: 2rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: .5rem 2%
+  padding: 0.5rem 2%;
 }
 
 .checkout legend {
   color: var(--text);
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
 
 .checkout label {
   display: block;
   padding-top: 1rem;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .checkout div {
   padding-top: 1rem;
   color: var(--text);
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .checkout input[type="text"],
@@ -383,16 +379,16 @@ header img {
   border: solid 1px var(--border);
   border-radius: 6px;
   background-color: var(--background);
-  padding: .75rem;
+  padding: 0.75rem;
   width: 100%;
   max-width: 400px;
 }
 
-.checkout input[type=submit] {
+.checkout input[type="submit"] {
   background-image: linear-gradient(blue, rgb(119, 119, 244));
   color: white;
   border-radius: 6px;
-  padding: .8rem;
+  padding: 0.8rem;
   width: 96%;
   max-width: 400px;
   margin: -1 rem 2% 2rem 2%;
