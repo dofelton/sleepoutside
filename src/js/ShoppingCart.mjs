@@ -16,13 +16,18 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p>Qty:</p>
+  <span class="minus" data-id=${item.Id}>-</span>
+  <input class="cart-card__quantity" value=${item.Qty}>
+  <span class="plus" data-id=${item.Id}>+</span>
+  </div>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <span class="delete" id=${item.Id}>&#10005;</span>
 </li>`;
 
   return newItem;
 }
-  
+
 export default class ShoppingCart {
   constructor(key, parentSelector) {
       this.key = key;
@@ -35,7 +40,7 @@ export default class ShoppingCart {
     this.renderCartContents(list);
   }
   calculateListTotal(list) {
-    const amounts = list.map((item) => item.FinalPrice);
+    const amounts = list.map((item) => item.FinalPrice * item.Qty);
     this.total = amounts.reduce((sum, item) => sum + item);
   }
   
@@ -50,25 +55,23 @@ export default class ShoppingCart {
       decrease.forEach((item) => item.addEventListener("click", this.minus));
       var increase = document.querySelectorAll(".plus");
       increase.forEach((item) => item.addEventListener("click", this.plus));
-      document.querySelector(".list-total").innerText += `$${this.total}`;
+      this.totalInCart(this.total);
     } else {
       const htmlItems = `<h3>The cart is Empty</h3>`;
       document.querySelector(".product-list").innerHTML = htmlItems;
     }
-    this.total(cartItems);
   }
 
-  total(cartItems) {
-    var displayTotal = document.querySelector(".cart-total");
-    if (cartItems.length > 0) {
-      var finalPrice = 0;
-      cartItems.forEach((element) => {
-        finalPrice += element.FinalPrice * element.Qty;
-      });
-      displayTotal.innerHTML = `<b>Total</b>: $${finalPrice.toFixed(2)}`;
-      displayTotal.style.display = "block";
+  totalInCart(total) {
+    var totalPrice = document.querySelector(".cart-total");
+    var totalElement = document.querySelector(".total");
+  
+    if (total > 0) {
+      const temp = String(total);
+      totalElement.innerText = `${temp}`;
+      totalPrice.style.display = "block";
     } else {
-      displayTotal.style.display = "none";
+      totalPrice.style.display = "none";
     }
   }
   deleteFromCart(item) {
@@ -88,7 +91,8 @@ export default class ShoppingCart {
     location.reload();
   }
   
-   minus(id) {
+  minus(id) {
+    const total = document.querySelector(".total").innerHTML;
     var nextSibling = parseInt(id.target.nextElementSibling.value) - 1;
     const item = id.target.parentElement.nextElementSibling.nextElementSibling;
     if (nextSibling <= 0) {
@@ -100,9 +104,10 @@ export default class ShoppingCart {
         if (element.Id == id.target.dataset.id) {
           element.Qty = String(parseInt(element.Qty) - 1);
           // itemsInCart(data);
+          this.calculateListTotal(element);
           setLocalStorage("so-cart", data);
+          this.totalInCart(total);
           itemsInCart(data);
-          this.total(data);
           return;
         }
       });
@@ -110,6 +115,7 @@ export default class ShoppingCart {
   }
   
    plus(id) {
+    const total = document.querySelector(".total").innerHTML;
     var nextSibling = parseInt(id.target.previousElementSibling.value) + 1;
     id.target.previousElementSibling.value = nextSibling.toString();
     var data = getLocalStorage("so-cart");
@@ -117,8 +123,8 @@ export default class ShoppingCart {
       if (element.Id == id.target.dataset.id) {
         element.Qty = String(parseInt(element.Qty) + 1);
         setLocalStorage("so-cart", data);
+        this.totalInCart(total);
         itemsInCart(data);
-        this.total(data);
         return;
       }
     });
