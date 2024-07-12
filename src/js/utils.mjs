@@ -39,25 +39,23 @@ export function renderListWithTemplate(
 }
 
 export function itemsInCart() {
+  var totalItems = 0;
   const inCart = getLocalStorage("so-cart");
-  const circle = document.querySelector(".circle");
+  const displayNum = document.querySelector(".num-items");
   try {
-    if (inCart.length > 0 && inCart.length < 10) {
-      circle.style.display = "block";
-      var number = document.querySelector(".one-number");
-      number.style.display = "block";
-      number.innerHTML = inCart.length;
-    } else if (inCart.length >= 10) {
-      circle.style.display = "block";
-      var display = document.querySelector(".two-numbers");
-      display.style.display = "block";
-      display.innerHTML = inCart.length;
+    for (let item of inCart) {
+      totalItems += parseInt(item.Qty)
+    }
+    if (inCart && totalItems > 0) {
+      displayNum.innerHTML = totalItems;
+      displayNum.style.display = "inline-block";
+      displayNum.classList.add("animaNum");
+      setTimeout(() => {displayNum.classList.remove("animaNum")}, 2000);
     } else {
-      circle.style.display = "none";
-      document.querySelector(".one-number").style.display = "none";
-      document.querySelector(".two-numbers").style.display = " none";
+      displayNum.parentElement.style.display = "none";
     }
   } catch {
+    displayNum.parentElement.style.display = "none";
     new Error("Error reading cookies");
   }
 }
