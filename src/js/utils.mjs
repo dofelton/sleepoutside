@@ -43,12 +43,13 @@ export function itemsInCart() {
   const inCart = getLocalStorage("so-cart");
   const displayNum = document.querySelector(".num-items");
   try {
-    for (let item of inCart) {
-      totalItems += parseInt(item.Qty)
-    }
     if (inCart && totalItems > 0) {
+      for (let item of inCart) {
+        totalItems += parseInt(item.Qty)
+      }
       displayNum.innerHTML = totalItems;
       displayNum.style.display = "inline-block";
+      displayNum.parentElement.style.display = "block";
       displayNum.classList.add("animaNum");
       setTimeout(() => {displayNum.classList.remove("animaNum")}, 2000);
     } else {
