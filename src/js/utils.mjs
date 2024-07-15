@@ -39,8 +39,9 @@ export function renderListWithTemplate(
 }
 
 export function itemsInCart() {
+  var totalItems = 0;
   const inCart = getLocalStorage("so-cart");
-  const circle = document.querySelector(".circle");
+  const displayNum = document.querySelector(".num-items");
   try {
     const items = inCart.map((item) => parseInt(item.Qty));
     var total = items.reduce((sum, item) => sum + item);
@@ -55,12 +56,12 @@ export function itemsInCart() {
       var display = document.querySelector(".two-numbers");
       display.style.display = "block";
       display.innerHTML = total;
+
     } else {
-      circle.style.display = "none";
-      document.querySelector(".one-number").style.display = "none";
-      document.querySelector(".two-numbers").style.display = " none";
+      displayNum.parentElement.style.display = "none";
     }
   } catch {
+    displayNum.parentElement.style.display = "none";
     new Error("Error reading cookies");
   }
 }

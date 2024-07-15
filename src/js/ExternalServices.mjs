@@ -5,7 +5,7 @@ function convertToJson(res) {
   if (res.ok) {
     return response;
   } else {
-    throw { name: 'servicesError', message: response };
+    throw { name: "servicesError", message: response };
   }
 }
 
