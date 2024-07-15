@@ -43,15 +43,20 @@ export function itemsInCart() {
   const inCart = getLocalStorage("so-cart");
   const displayNum = document.querySelector(".num-items");
   try {
-    if (inCart && totalItems > 0) {
-      for (let item of inCart) {
-        totalItems += parseInt(item.Qty)
-      }
-      displayNum.innerHTML = totalItems;
-      displayNum.style.display = "inline-block";
-      displayNum.parentElement.style.display = "block";
-      displayNum.classList.add("animaNum");
-      setTimeout(() => {displayNum.classList.remove("animaNum")}, 2000);
+    const items = inCart.map((item) => parseInt(item.Qty));
+    var total = items.reduce((sum, item) => sum + item);
+
+    if (inCart.length > 0 && total < 10) {
+      circle.style.display = "block";
+      var number = document.querySelector(".one-number");
+      number.style.display = "block";
+      number.innerHTML = total;
+    } else if (total >= 10) {
+      circle.style.display = "block";
+      var display = document.querySelector(".two-numbers");
+      display.style.display = "block";
+      display.innerHTML = total;
+
     } else {
       displayNum.parentElement.style.display = "none";
     }
@@ -84,7 +89,7 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement,data, itemsInCart);
   renderWithTemplate(footerTemplate, footerElement);
-  itemsInCart();
+  // itemsInCart();
 }
 
 export function setClick(selector, callback) {
